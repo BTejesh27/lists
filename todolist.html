@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000000;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #todo-container {
+            width: 300px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            padding: 20px;
+        }
+
+        #todo-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .todo-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #000000;
+            padding: 10px 0;
+        }
+
+        .delete-btn {
+            cursor: pointer;
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="todo-container">
+        <h2>To-Do List</h2>
+        <ul id="todo-list"></ul>
+        <input type="text" id="new-task" placeholder="New task...">
+        <button onclick="addTask()">Add Task</button>
+    </div>
+
+    <script>
+        function addTask() {
+            var taskInput = document.getElementById("new-task");
+            var taskText = taskInput.value.trim();
+
+            if (taskText !== "") {
+                var todoList = document.getElementById("todo-list");
+
+                var li = document.createElement("li");
+                li.className = "todo-item";
+                li.innerHTML = `
+                    <span>${taskText}</span>
+                    <span class="delete-btn" onclick="deleteTask(this)">Delete</span>
+                `;
+
+                todoList.appendChild(li);
+
+                taskInput.value = "";
+            }
+        }
+
+        function deleteTask(element) {
+            var li = element.parentNode;
+            var todoList = document.getElementById("todo-list");
+            todoList.removeChild(li);
+        }
+    </script>
+
+</body>
+</html>
